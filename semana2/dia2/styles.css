@@ -3,6 +3,10 @@ h1 {
     font-size: 40px;
 }
 
+body {
+    background-color: #088f8f;
+}
+
 .selector-clase {
     color: red;
     font-size: 30px;
@@ -11,4 +15,152 @@ h1 {
 #firstId {
     color: yellowgreen;
     font-size: 24px;
+}
+
+#hohoho {
+    background-color: red;
+    padding: 10px;
+    border-radius: 20px;
+    width: 150px;
+    height: 50px;
+    border: none;
+    transition: all 0.6s ease;
+}
+
+#hohoho:hover {
+    background-color: green;
+}
+
+.pseudo-clase-hover {
+    font-size: 25px;
+}
+
+.pseudo-clase-hover:hover {
+    color: blue;
+    cursor: pointer;
+}
+
+.pseudo-clase-link-hover {
+    text-decoration: none;
+    font-size: 20px;
+}
+
+.pseudo-clase-link-hover:hover {
+    text-decoration: underline;
+}
+
+.pseudo-clase-link-hover:active {
+    font-size: 30px;
+    color: orange;
+    text-decoration: none;
+}
+
+.pseudo-clase-link-hover:focus {
+    border: 2px dotted #444;
+}
+
+.hijos-pseudo p:nth-child(3n-1) {
+    background-color: blue;
+}
+
+.hijos-pseudo p:nth-child(3n) {
+    background-color: green;
+}
+.hijos-pseudo p:nth-child(3n-2) {
+    background-color: red;
+}
+
+.prueba-before::before {
+    content: "hola"; 
+    color: red;
+    font-size: 20px;
+    width: 12px;
+    height: 12px;
+    background-color: yellow;
+    padding: 6px;
+}
+
+.prueba-after::after {
+    content: "hello";
+    color: yellow;
+    background-color: blue;
+    width: 12px;
+    height: 12px;
+    padding: 6px;
+}
+
+.prueba-first-letter::first-letter {
+    color: red;
+    font-size: 34px;
+    text-decoration: underline;
+}
+
+.input1:required {
+    border: 1px solid red;
+}
+
+.input1:valid {
+    background-color: blue;
+    color: white;
+}
+
+.input1:invalid {
+    background-color: red;
+    color: white;
+}
+
+.padre ul li:nth-child(3) {
+    background-color: orangered;
+}
+
+.selecciona-este-li {
+    background-color: green;
+}
+
+.padre li:nth-child(4) {
+    background-color: aqua;
+}
+
+.padre li:nth-child(1) {
+    background-color: gold;
+}
+
+.container {
+    color: blue;
+    font-size: 10px;
+    border: 1px solid green;
+}
+
+.child {
+    border: inherit;
+    font-size: initial;
+}
+
+.miparrafo {
+    padding: 10px;
+    color: red;
+}
+
+.miparrafo {
+    background-color: grey;
+    color: blue;  /*la última capa tiene mayor preferencia*/
+}
+
+.caja1 {
+    background-color: brown;
+    width: 300px;
+    height: 300px;
+    font-size: 30px;
+}
+
+.caja2 {
+    background-color: aquamarine;
+    width: 50%;
+    font-size: 30px;
+}
+
+.caja3 {
+    background-color: goldenrod;
+    width: 50%;
+    font-size: 1rem;
 }
