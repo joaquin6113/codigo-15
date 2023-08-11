@@ -8,28 +8,73 @@
 <body>
     <h1>Registro de usuarios</h1>
 
-    <form action="" method="post">
+    <form action="" method="">
         <p>
-        <input type="text" placeholder="Nombre" />
+        <input type="text" placeholder="Nombre" name="name" />
         </p>
         <p>
-            <input type="text" placeholder="Apellido" />
+            <input type="text" placeholder="Apellido" name="lastName" />
         </p>
         <p>
-            <input type="email" placeholder="E-mail" />
+            <input type="email" placeholder="E-mail" name="mail" />
         </p>
         <p>
-            <input type="date" placeholder="Fecha de nacimiento" />
+            <input type="date" placeholder="Fecha de nacimiento" name="birthDate" />
         </p>
         <p>
-            <input type="number" placeholder="Ingresa tu DNI" />
+            <input type="number" placeholder="Ingresa tu DNI" name="dni" />
         </p>
         <p>
-            <input type="tel" placeholder="Teléfono" />
+            <input type="tel" placeholder="Teléfono" name="phone" />
         </p>
         <p>
-            <input type="password" placeholder="Ingrese su contraseña" />
+            <input type="password" placeholder="Ingrese su contraseña" name="password" />
         </p>
+        <p><strong>Género</strong></p>
+        <p>
+            <p>
+            <label for="">
+                Masculino
+                <input type="radio" name="género" value="masculine" />
+            </label>
+            </p>
+            <p>
+            <label for="">
+                Femenino
+                <input type="radio" name="género" value="feminine" />
+            </label>
+            </p>
+            <p>
+            <label for="">
+                Otro
+                <input type="radio" name="género" value="other" />
+            </label>
+            </p>
+        </p>
+        <p>Países</p>
+        <select name="pais" id="">
+            <option value="" disabled selected>País</option>
+            <option value="pe">Perú</option>
+            <option value="ar">Argentina</option>
+            <option value="ch">Chile</option>
+            <option value="co">Colombia</option>
+        </select>
+        <p>Ciudades</p>
+        <select name="ciudad" id="">
+            <option value="01">Lima</option>
+            <option value="02">Lambayeque</option>
+            <option value="03">Iquitos</option>
+            <option value="04">Cuzco</option>
+            <option value="05">Puno</option>
+        </select>
+        <p>Cursos</p>
+        <p>JavaScript<input type="checkbox" name="curso_1" /></p>
+        <p>HTML<input type="checkbox" name="curso_2" /></p>
+        <p>CSS<input type="checkbox" name="curso_3" /></p>
+        <p>React JS<input type="checkbox" name="curso_4" /></p>
+        <p>Next JS<input type="checkbox" name="curso_5" /></p>
+
+        <button type="submit">Enviar</button>
     </form>
 </body>
 </html>
