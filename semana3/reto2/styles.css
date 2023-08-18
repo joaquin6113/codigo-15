@@ -1,0 +1,103 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+
+
+body {
+    font-size: 18px;
+    font-family: 'Outfit', sans-serif;
+}
+
+.container {
+    height: 100vh;
+    background-color: hsl(217, 54%, 11%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.box {
+    padding: 25px;
+    background-color: hsl(216, 50%, 16%);
+    border-radius: 20px;
+    width: 17%;
+}
+
+.first {
+    width: 100%;
+    border-radius: 20px;
+}
+
+h1 {
+    color: #ffffff;
+    font-weight: 600;
+    margin-top: 15px;
+}
+
+.desc {
+    color: hsl(215, 51%, 70%);
+    font-weight: 300;
+    margin-top: 15px;
+}
+
+.down {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 25px;
+}
+
+.nft {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nft p {
+    color: hsl(178, 100%, 50%);
+    margin-left: 5px;
+}
+
+.imgnft {
+    width: 10px;
+    height: 15px;
+}
+
+.time {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.time p {
+    color: hsl(215, 51%, 70%);
+    margin-left: 5px;
+}
+
+.line {
+    margin-top: 20px;
+    margin-bottom: 15px;
+    border-color: hsl(215, 32%, 27%);
+    color: hsl(215, 32%, 27%);
+}
+
+.below {
+    display: flex;
+    align-items: center;
+}
+
+.bottom-text {
+    color: hsl(215, 51%, 70%);
+    margin-left: 15px;
+}
+
+.white {
+    color: #ffffff;
+}
+
+.face {
+    border: solid 1px #ffffff;
+    border-radius: 50%;
+    width: 10%;
+}

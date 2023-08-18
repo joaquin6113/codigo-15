@@ -1,0 +1,17 @@
+/* fuente local */
+@font-face {
+    font-family: "Ubuntu";
+    src: url("../multi-step-form-main/assets/fonts/Ubuntu-Bold.ttf");
+    font-weight: 700;
+}
+
+@font-face {
+    font-family: "Ubuntu";
+    src: url("../multi-step-form-main/assets/fonts/Ubuntu-Medium.ttf");
+    font-weight: 500;
+}
+@font-face {
+    font-family: "Ubuntu";
+    src: url("../multi-step-form-main/assets/fonts/Ubuntu-Regular.ttf");
+    font-weight: 400;
+}
