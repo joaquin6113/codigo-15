@@ -1,0 +1,125 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Helvetica, sans-serif;
+    color: #fff;
+}
+
+.container {
+    display: grid;
+    grid-template-areas: 
+    "header menu menu menu"
+    "hero hero hero hero"
+    "main main empty image"
+    "main main empty extra"
+    "banner banner banner banner";
+}
+
+.header {
+    background-color: rgb(26, 26, 57);
+    grid-area: header;
+    height: 5vh;
+}
+
+.menu {
+    background-color: rgb(252, 73, 73);
+    grid-area: menu;
+}
+
+.hero {
+    background-color: skyblue;
+    grid-area: hero;
+    height: 60vh;
+}
+
+.main {
+    background-color: rgb(26, 26, 57);
+    grid-area: main;
+    height: 25vh;
+}
+
+.empty {
+    background-color: #fff;
+    grid-area: empty;
+}
+
+.image {
+    background-color: rgb(201, 255, 201);
+    color: #000;
+    grid-area: image;
+}
+
+.extra {
+    background-color: rgb(92, 167, 92);
+    grid-area: extra;
+}
+
+.banner {
+    background-color: rgb(255, 205, 40);
+    grid-area: banner;
+    height: 10vh;
+}
+
+@media only screen and (max-width: 600px) {
+    .container {
+        display: grid;
+        grid-template-areas: 
+        "header"
+        "menu"
+        "hero"
+        "main"
+        "banner"
+        "extra"
+        "image";
+    }
+    
+    .header {
+        background-color: rgb(26, 26, 57);
+        grid-area: header;
+        height: 9.5vh;
+    }
+    
+    .menu {
+        background-color: rgb(252, 73, 73);
+        grid-area: menu;
+        height: 9.5vh;
+    }
+    
+    .hero {
+        background-color: skyblue;
+        grid-area: hero;
+        height: 18.2vh;
+    }
+    
+    .main {
+        background-color: rgb(26, 26, 57);
+        grid-area: main;
+        height: 18.2vh;
+    }
+    
+    .empty {
+        display: none;
+    }
+    
+    .image {
+        background-color: rgb(201, 255, 201);
+        color: #000;
+        grid-area: image;
+        height: 14.2vh;
+    }
+    
+    .extra {
+        background-color: rgb(92, 167, 92);
+        grid-area: extra;
+        height: 14.2vh;
+    }
+    
+    .banner {
+        background-color: rgb(255, 205, 40);
+        grid-area: banner;
+        height: 14.2vh;
+    }
+}
