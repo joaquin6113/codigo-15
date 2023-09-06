@@ -1,0 +1,24 @@
+#image {
+    background: url("../assets/images/image-product-1.jpg") !important;
+    background-size: cover !important;
+}
+
+#img1:hover {
+    box-shadow: inset 0 0 0 1000px rgba(255, 255, 255 ,0.7) !important;
+      
+}
+
+#img2:hover {
+    box-shadow: inset 0 0 0 1000px rgba(255, 255, 255 ,0.7) !important;
+      
+}
+
+#img3:hover {
+    box-shadow: inset 0 0 0 1000px rgba(255, 255, 255 ,0.7) !important;
+      
+}
+
+#img4:hover {
+    box-shadow: inset 0 0 0 1000px rgba(255, 255, 255 ,0.7) !important;
+      
+}
