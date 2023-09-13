@@ -209,3 +209,33 @@ const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
 const numerosFiltrados = numbers.filter((number) => number % 3 === 0)
 console.log(numerosFiltrados)
+
+// findIndex
+
+const nombresb = ["Pepe", "Juan", "María", "Mercedez", "Juan", "María"]
+
+const busquedab = nombresb.findIndex((nombre) => nombre === "Carlos")
+const busqueda2 = nombres.find((nombre) => nombre === "Carlos")
+
+console.log(busquedab)
+console.log(busqueda2)
+
+// every
+let par = true
+
+const numerosb = [2, 4, 6, 8, 10]
+for (const numero of numerosb) {
+    if (numero % 2 !== 0) {
+        par = false
+    }
+}
+console.log("resultado", par)
+
+const todoEsPar = numerosb.every((numero) => numero % 2 === 0)
+console.log("resultado con every", todoEsPar)
+
+// some
+const numerosc = [2, 3, 5, 7, 9]
+
+const respuesta = numerosc.some((numero) => numero % 2 === 0)
+console.log("respuesta", respuesta)
