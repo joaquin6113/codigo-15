@@ -63,13 +63,18 @@ form.onsubmit = function (event) {
     verifyIfEmptyInput(input);
   }
 
-  // vamos a guardar los valores del objeto en un array y verificar si alguno esta vacio
-  const inputValues = Object.values(values);
+if (values.password !== values["verify-password"]) {
+  Swal.fire({
+    icon: "error",
+    title: "Error",
+    text: "The password doesn't match"
+  })
+  return;
+}
 
-  const validacion = inputValues.find((value) => !value);
-
-  if (typeof validacion === "string") {
-    alert("Completo todos los campos");
-    return;
-  }
-};
+Swal.fire({
+  icon: "success",
+  title: "Succesful",
+  text: "You've registered succesfully"
+})
+}
