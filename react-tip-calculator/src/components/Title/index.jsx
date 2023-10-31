@@ -1,6 +1,5 @@
-/* eslint-disable react/prop-types */
-export default function Title({ text }) {
+export default function Title({ title }) {
     return (
-        <h2 className="font-semibold text-green-900 my-3">{text}</h2>
+        <h2 className="font-semibold text-green-900 my-3">{title}</h2>
     )
 }

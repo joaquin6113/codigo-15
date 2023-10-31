@@ -1,37 +1,38 @@
-export default function Sumary() {
+export default function Summary({ first, second, onDoneClick, onResetClick }) {
     return (
-        <div class="bg-[#00494d] rounded-md text-white px-5 py-10 my-5">
-          <div class="flex justify-between items-center">
-            <div>
-              <h3 class="font-semibold">Tip Amount</h3>
-              <p class="text-gray-300">/ person</p>
+        <>
+          <div className="bg-[#00494d] rounded-xl text-white p-5 my-5">
+            <div className="flex justify-between items-center">
+              <div>
+                <h3 className="font-semibold">Tip Amount</h3>
+                <p className="text-gray-300">/ person</p>
+              </div>
+              <div>
+                <h4 id="tip-amount" className="text-3xl text-green-200 font-semibold">{first}</h4>
+              </div>
             </div>
-            <div>
-              <h4 class="text-3xl text-green-200 font-semibold" id="tip-amount">
-                $0.00
-              </h4>
+            <div className="flex justify-between items-center">
+              <div>
+                <h3 className="font-semibold">Total</h3>
+                <p className="text-gray-300">/ person</p>
+              </div>
+              <div>
+                <h4 id="total" className="text-3xl text-green-200 font-semibold">{second}</h4>
+              </div>
+            </div>
+            <div className="mt-10 text-center grid grid-cols-2 gap-5">
+              <button 
+              id="button"
+              className="w-full text-green-950 bg-green-100 p-3 rounded-md font-semibold text-xl"
+              onClick={onDoneClick}>
+              Done</button>
+              <button
+              id="second-button"
+              className="w-full text-green-950 bg-green-100 p-3 rounded-md font-semibold text-xl"
+              onClick={onResetClick}>
+              Reset</button>
             </div>
           </div>
-
-          <div class="flex justify-between items-center mt-7">
-            <div>
-              <h3 class="font-semibold">Total</h3>
-              <p class="text-gray-300">/ person</p>
-            </div>
-            <div>
-              <h4 class="text-3xl text-green-200 font-semibold" id="total">
-                $0.00
-              </h4>
-            </div>
-          </div>
-          <div class="mt-10 text-center">
-            <button
-              id="btn-reset"
-              class="w-full text-green-950 bg-green-100 p-3 rounded-md font-semibold text-xl"
-            >
-              RESET
-            </button>
-          </div>
-        </div>
+        </>
     )
 }

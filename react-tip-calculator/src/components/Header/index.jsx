@@ -1,9 +1,11 @@
-import logo from "../../assets/logo.svg";
+import logo from "../../assets/logo.svg"
 
-export default function Header1() {
-  return (
-    <div className="h-[15vh] py-10 flex justify-center">
-      <img src={logo} alt="" />
-    </div>
-  );
+export default function Logo() {
+    return (
+        <>
+          <div className="h-[15vh] py-7 flex justify-center">
+            <img src={logo} alt=""/>
+        </div>
+        </>
+    )
 }
