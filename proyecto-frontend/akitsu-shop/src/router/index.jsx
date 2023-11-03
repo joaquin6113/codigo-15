@@ -1,11 +1,16 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom"
-import { Home } from "../pages"
+import { AboutUsPage, HomePage, SignUp } from "../pages"
+import { NavLayout } from "../layouts"
 
 export default function Router() {
     return (
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Home/>}/>
+            <Route element={<NavLayout/>}>
+                <Route path="/" element={<HomePage/>}/>
+                <Route path="/sobrenosotros" element={<AboutUsPage/>}/>
+            </Route>
+            <Route path="/testing" element={<SignUp/>}/>
           </Routes>
         </BrowserRouter>
     )

@@ -1,22 +1,18 @@
 // Funciones para CRUD
-const URLApi = "https://654030cc45bedb25bfc1b81f.mockapi.io/tasks"
+import { makeHttpRequest } from "./config"
 
-export async function create(body) {
-    const response = await fetch(URLApi, {
-        method: "POST",
-        headers: {
-            "Content-Type" : "application/json"
-        },
-        body: JSON.stringify(body)
-    })
-
-    const data = await response.json()
-
-    return data
+export async function create(body, url) {
+    return await makeHttpRequest({ url, body, method: "POST" })
 }
 
-export async function read() {
-    const response = await fetch(URLApi)
-    const data = await response.json()
-    return data
+export async function read(url) {
+    return await makeHttpRequest({ url })
+}
+
+export async function update(id, body, url) {
+    return await makeHttpRequest({ url, id, method: "PUT", body })
+}
+
+export async function destroy(id, url) {
+    return await makeHttpRequest({ url, id, mehtod: "DELETE" })
 }

@@ -1,9 +1,15 @@
 import { useState } from "react"
+import { useSelector } from "react-redux"
+import { selectorUserId } from "../../selectors/userSelector"
 import Swal from "sweetalert2"
 import { create } from "../../services"
+import TextField from "../TextField"
+import { Button } from "../../components"
 
 export default function FormTask({ getTasks }) {
     const [taskText, setTaskText] = useState("")
+
+    const userId = useSelector(selectorUserId)
 
     const handleInputChange = (e) => setTaskText(e.target.value)
 
@@ -18,17 +24,24 @@ export default function FormTask({ getTasks }) {
             return
         }
 
-        await create({
-            text: taskText,
-            status: "created"
-        })
-
+        await create(
+            {
+                text: taskText,
+                status: "created",
+                category: null,
+                priority: null,
+                user_id: userId
+            }, 
+            "tasks",
+        )
+        
         setTaskText("")
+
         Swal.fire({
-            title: "Succes",
-            text: "Tarea añadida correctamente",
-            icon: "success",
-        })
+           text: "Actualizado correctamente",
+           icon: "success",
+           title: "Success",
+       })
 
         await getTasks()
     }
@@ -37,14 +50,11 @@ export default function FormTask({ getTasks }) {
         <>
           <h2 className="font-semibold text-xl mt-3">Crear tu tarea</h2>
             <form className="my-5 flex items-center" onSubmit={handleFormSubmit}>
-              <input 
-              type="text" 
-              value={taskText}
-              onChange={handleInputChange}
-              className="border w-full px-2 py-3 rounded-l outline-none" 
-              placeholder="Nombre de la tarea"
-              />
-              <button className="bg-green-400 px-2 py-3 rounded-r text-white border border-green-400">Crear</button>
+              <TextField 
+              className={"rounded-l"} 
+              value={taskText} 
+              onChange={handleInputChange}/>
+              <Button text={"Crear"} type="submit" variant="secondary" className={"rounded-r"}/>
             </form>
         </>
     )
