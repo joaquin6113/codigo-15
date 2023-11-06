@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { PencilIcon } from "@heroicons/react/24/solid"
-import { Dialog, } from "@headlessui/react"
+import { Dialog } from "@headlessui/react"
 import { Button, Select, TextField } from "./../../components"
 import { update } from "../../services"
 import Swal from "sweetalert2"
@@ -45,7 +45,7 @@ export default function Edit({ task, getTasks }) {
           className="h-6 w-6 text-blue-500 cursor-pointer"  
           onClick={() => setOpen(true)}
           />
-          <Dialog 
+          <Dialog   
           open={open} 
           onClose={() => setOpen(false)} 
           className="relative z-50"

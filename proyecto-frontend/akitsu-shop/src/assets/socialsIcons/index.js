@@ -3,11 +3,11 @@ import facebook from "../socialsIcons/facebook.png"
 import tiktok from "../socialsIcons/tiktok.webp"
 import whatsapp from "../socialsIcons/whatsapp.jpg"
 
-const socialsIcons = {
+const socialsIcons = [
     instagram,
     facebook,
     tiktok,
     whatsapp,
-}
+]
 
 export default socialsIcons

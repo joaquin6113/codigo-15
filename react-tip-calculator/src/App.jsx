@@ -62,9 +62,7 @@ export default function App() {
   }
 
   const onDoneClick = () => {
-    if (!valuePercentage || !billValue) {
-      return
-    }
+    if (!valuePercentage || !billValue) return
 
     let inputPeople = peopleValue
     if (!inputPeople) {

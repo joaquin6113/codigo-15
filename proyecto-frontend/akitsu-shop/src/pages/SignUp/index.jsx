@@ -1,60 +1,46 @@
-import { useState } from 'react'
-import { Dialog, Switch } from '@headlessui/react'
-import { PlusCircleIcon } from '@heroicons/react/24/solid'
+import { useForm } from "../../hooks/useForm"
+import { useDispatch } from "react-redux"
+import { useNavigate } from "react-router-dom"
+import { saveUser } from "../../slices/userSlice"
+import { Card, Form } from "../../components"
+import { inputs } from "./inputs"
+import { create } from "../../services"
 
 export default function SignUp() {
-    const [hasDiscount, setHasDiscount] = useState(false)
+    const { errors, values, handleInputChange, validateIfValuesHaveEmpty } = useForm({
+        name: "",
+        lastname: "",
+        email: "",
+        password: "",
+    })
 
-    function MyToggle() {
-        const [enabled, setEnabled] = useState(false)
-        
-        return (
-          <Switch
-            checked={enabled}
-            onChange={setEnabled}
-            className={`${
-              enabled ? 'bg-blue-600' : 'bg-gray-200'
-            } relative inline-flex h-6 w-11 items-center rounded-full`}
-          >
-            <span className="sr-only">Enable notifications</span>
-            <span
-              className={`${
-                enabled ? 'translate-x-6' : 'translate-x-1'
-              } inline-block h-4 w-4 transform rounded-full bg-white transition`}
-            />
-          </Switch>
-        )
-      }
-
-      function MyDialog() {
-        let [isOpen, setIsOpen] = useState(true)
-      
-        return (
-          <Dialog open={isOpen} onClose={() => setIsOpen(false)}>
-            <Dialog.Panel>
-              <Dialog.Title>Deactivate account</Dialog.Title>
-              <Dialog.Description>
-                This will permanently deactivate your account
-              </Dialog.Description>
-      
-              <p>
-                Are you sure you want to deactivate your account? All of your data
-                will be permanently removed. This action cannot be undone.
-              </p>
-      
-              <button onClick={() => setIsOpen(false)}>Deactivate</button>
-              <button onClick={() => setIsOpen(false)}>Cancel</button>
-            </Dialog.Panel>
-          </Dialog>
-        )
-      }
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
     
+    const handleFormSubmit = async (e) => {
+        e.preventDefault()
+        if (!validateIfValuesHaveEmpty()) return
+        
+        const user = await create(values, "users")
+        dispatch(saveUser(user))
+        navigate("/")
+    }
+
     return (
         <>
-          {MyToggle()}
-          <h1>un toggle</h1>
-          {console.log(hasDiscount)}
-          {MyDialog()}
+          <div className="h-screen flex items-center justify-center mx-auto max-w-md">
+            <Card>
+                <h1 className="text-2xl font-semibold capitalize my-5">crear cuenta</h1>
+                <Form 
+                  handleFormSubmit={handleFormSubmit}
+                  handleInputChange={handleInputChange}
+                  inputs={inputs}
+                  values={values}
+                  errors={errors}
+                  buttonText="Crear cuenta"
+                />
+            </Card>
+          </div>
         </>
     )
 }

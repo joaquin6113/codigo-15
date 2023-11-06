@@ -13,7 +13,7 @@ export default function SideOptions({ setTitle }) {
             <Card>
                 <h3 className="text-3xl mb-5">Filtrar por:</h3>
                     <p className="text-2xl">Productos</p>
-                    <SpanList setTitle={setTitle} entries={["Hogar", "Cocina", "Ropa", "Accesorios / Otros"]}/>
+                    <SpanList setTitle={setTitle} entries={["Productos más recientes", "Hogar", "Cocina", "Ropa", "Accesorios / Otros"]}/>
                     <p className="text-2xl">Precios</p>
                     <SpanList entries={["Menor a mayor", "Mayor a menor"]}/>
             </Card>
