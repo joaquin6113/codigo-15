@@ -44,8 +44,8 @@ export default function ImagesModal({ getProducts, setOpen2 }) {
                 link={group.image}
                 key={group.number}
                 id={group.number}
-                wSize="125px"
-                hSize="125px"
+                wSize="max-w-[125px]"
+                hSize="max-h-[125px]"
                 className="hover:border-[3px] hover:scale-110 border-black transiton duration-300 rounded-lg"
                 clicked={group.clicked}
                 onClick={onImageClick}/>)

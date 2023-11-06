@@ -23,7 +23,7 @@ export default function ProductPreview() {
     return(
         <>
           <ProductInfo 
-          cardClass="w-[60%] h-[70%] mt-10"
+          cardClass={"w-[60%] h-[70%] mt-10"}
           title="Vista previa del producto" 
           index={Number(id) - 1}
           products={products}

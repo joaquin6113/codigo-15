@@ -24,10 +24,10 @@ export default function AboutUs() {
                         <p className="text-xl">Pueblo Libre, Perú</p>
                       </div>
                       <div className="flex flex-col text-lg mt-5 gap-1">
-                        <IconSocial img={socialsIcons.instagram} text="instagram" url="https://www.instagram.com/akitsu.shop/"/>
-                        <IconSocial img={socialsIcons.facebook} text="facebook" url="https://www.instagram.com/akitsu.shop/"/>
-                        <IconSocial img={socialsIcons.tiktok} text="tiktok" url="https://www.instagram.com/akitsu.shop/"/>
-                        <IconSocial img={socialsIcons.whatsapp} text="whatsapp" url="https://www.instagram.com/akitsu.shop/"/>
+                        <IconSocial img={socialsIcons[0]} text="instagram" url="https://www.instagram.com/akitsu.shop/"/>
+                        <IconSocial img={socialsIcons[1]} text="facebook" url="https://www.facebook.com/akitsu.shop/"/>
+                        <IconSocial img={socialsIcons[2]} text="tiktok" url="https://www.tiktok.com/@akitsu.shop"/>
+                        <IconSocial img={socialsIcons[3]} text="whatsapp" url="https://wa.me/c/51999680749"/>
                       </div>
                     </div>
                 </div>

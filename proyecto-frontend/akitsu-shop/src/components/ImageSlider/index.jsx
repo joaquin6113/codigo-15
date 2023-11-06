@@ -1,8 +1,5 @@
 export default function ImageSlider({ products, id, idRecent }) {
-  const finalId = () => {
-    if (!id) return idRecent
-    return Number(id) - 1
-  }
+  const finalId = () => !id ? idRecent : Number(id) - 1
 
     return (
         <>

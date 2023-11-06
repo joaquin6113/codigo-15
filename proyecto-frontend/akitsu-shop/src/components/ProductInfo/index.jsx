@@ -1,47 +1,74 @@
 import { useState } from "react"
+
 import { useParams, useNavigate } from "react-router-dom"
 import { Button, Card, DialogContainer, Image, ImageSlider, ImagesModal, ProductData, ProductModal, SideArrows } from "../../components"
 
-export default function ProductInfo({ title, products, index = products.length - 1, getProducts, cardClass }) {
+export default function ProductInfo({ title, products, index = products.length - 1, getProducts, cardClass, titleChanged, special, admin, user }) {
     const navigate = useNavigate()
     const { id } = useParams()
 
+    const isAdmin = user?.email === admin
+
     const [open2, setOpen2] = useState(false)
 
-    const [indexId, setIndexId] = useState(0)
-    const [indexIdRecent, setIndexIdRecent] = useState(index)
+    const [indexIdRecent, setIndexIdRecent] = useState(special - 1)
 
-    const filteredProductsIds = products?.filter((cat) => cat.category === title).map((id) => id.id)
+    const plusOneRecent = () => {
+        setIndexIdRecent(indexIdRecent - 1)
+
+        if (indexIdRecent === index - 5 && index - 5 >= 0) {
+            setIndexIdRecent(index)
+            return
+        }
+        if (indexIdRecent === 0) setIndexIdRecent(index)
+    }
+
+    const minusOneRecent = () => {
+        if (indexIdRecent === index) {
+            index - 5 >= 0 ? setIndexIdRecent(index - 5) : setIndexIdRecent(0)
+            return
+        }
+
+        setIndexIdRecent(indexIdRecent + 1)
+    }
+
+    const [indexId, setIndexId] = useState(0)
+
+    const filter = () => {
+        let number = 0
+        if (titleChanged != number) {
+            number = titleChanged
+            const filter = products?.filter((cat) => cat.category === title).map((id) => id.id) 
+            
+            return filter
+        }
+    }
+
+    const filteredProductsIds = filter()
 
     const plusOne = () => {
         setIndexId(indexId + 1)
 
-        if (indexId === filteredProductsIds.length - 1) setIndexId(0)
+        if (indexId === filteredProductsIds?.length - 1) setIndexId(0)
     }
 
     const minusOne = () => {
         setIndexId(indexId - 1)
 
-        if (indexId === 0) setIndexId(filteredProductsIds.length - 1)
+        if (indexId === 0) setIndexId(filteredProductsIds?.length - 1)
     }
 
-    const plusOneRecent = () => {
-        setIndexIdRecent(indexIdRecent - 1)
+    const forIndexes = filteredProductsIds?.map((ids) => ids - 1)
 
-        if (indexId === 0 || indexId === index - 6) setIndexIdRecent(index)
+    const giveIndex = () => {
+        if (forIndexes === undefined) return 0
+        return forIndexes[forIndexes.length - 1]
     }
 
-    const minusOneRecent = () => {
-        if (indexId === index || index - 6 < 0) {
-            setIndexIdRecent(0)
-            return
+    const giveIdRecent = () => {
+        if (indexIdRecent <= - 1) {
+            setIndexIdRecent(-1 + filteredProductsIds?.length)
         }
-
-        if (indexId === index || index - 6 >= 0) {
-            setIndexId(index - 6)
-            return
-        }
-        setIndexIdRecent(indexIdRecent + 1)
     }
 
     const finish = () => {
@@ -49,18 +76,19 @@ export default function ProductInfo({ title, products, index = products.length -
     }
 
     return (
-        <div className="flex justify-center items-center flex-1 m-10">
-            <Card className={cardClass}>
+        <div className="flex flex-1 justify-center items-center m-10">
+          <div className={cardClass}>
+            <Card>
                 <div className="flex justify-between items-center">
                     <h1 className="text-5xl py-3 pb-6 pl-4 text-center">{title}:</h1>
-                    {!id && <ProductModal index={index} products={products} getProducts={getProducts}/>}
+                    {isAdmin && !id && <ProductModal index={index} products={products} getProducts={getProducts}/>}
                     {products[index]?.url && id && <div onClick={finish} className="mr-5"><Button text="Publicar"/></div>}
                 </div>
                 <hr className="border border-black mb-2 mx-5"/>
                 <div className="flex items-center">
                     <div className="w-[55%] flex items-center justify-between p-5">
                         <div className="flex flex-col items-center justify-center w-full py-12 px-6 gap-5 max-h-[600px]">
-                        {products[index]?.url && !id && products[index]?.category === title && 
+                        {products[index]?.url && !id && products[giveIndex()]?.category === title && 
                             <SideArrows onClickRigth={plusOne} onClickLeft={minusOne}>
                                 <ImageSlider key={id} id={filteredProductsIds[indexId]} products={products}/>
                             </SideArrows>}
@@ -78,10 +106,11 @@ export default function ProductInfo({ title, products, index = products.length -
                         </DialogContainer>
 
                     </div>
-                    {products[index]?.category === title && <ProductData title={title} products={products} index={indexId}/>}
-                    {title === "Productos más recientes" && <ProductData title={title} products={products} index={indexIdRecent}/>}
-                    {id && <ProductData title={title} products={products} index={index} id={id}/>}
+                    {products[giveIndex()]?.category === title && <ProductData admin={admin} user={user} title={title} products={products} indexNormal={filteredProductsIds[indexId]}/>}
+                    {title === "Productos más recientes" && <ProductData admin={admin} user={user} title={title} products={products} index={indexIdRecent}/>}
+                    {id && <ProductData admin={admin} user={user} title={title} products={products} index={index} id={id}/>}
                 </div>
             </Card>
+          </div>
         </div>
     )}

@@ -1,17 +1,24 @@
+import { useSelector } from "react-redux"
+import { adminUser, selectorUser } from "../selectors/productSelectors"
 import { BrowserRouter, Routes, Route } from "react-router-dom"
-import { AboutUsPage, HomePage, ProductPreviewPage, SignInPage, SignUpPage } from "../pages"
-import { NavLayout } from "../layouts"
+import { AboutUsPage, HomePage, Preview, ProductPreviewPage, SignInPage, SignUpPage } from "../pages"
+import { NavLayout, AdminLayout } from "../layouts"
 
 export default function Router() {
+  const admin = useSelector(adminUser)
+  const user = useSelector(selectorUser)
+
     return (
         <BrowserRouter>
           <Routes>
-            <Route element={<NavLayout/>}>
-                <Route path="/" element={<HomePage/>}/>
+            <Route element={<NavLayout admin={admin} user={user}/>}>
+                <Route path="/" element={<HomePage admin={admin} user={user}/>}/>
                 <Route path="/sobrenosotros" element={<AboutUsPage/>}/>
             </Route>
-            <Route path="/preview">
-              <Route path="/preview/:id" element={<ProductPreviewPage/>}/>
+            <Route element={<AdminLayout admin={admin} user={user}/>}>
+              <Route path="/preview"> {/*element={<Preview/>}*/}
+                <Route path="/preview/:id" element={<ProductPreviewPage/>}/>
+              </Route>
             </Route>
             <Route path="/signup" element={<SignUpPage/>}/>
             <Route path="/signin" element={<SignInPage/>}/>

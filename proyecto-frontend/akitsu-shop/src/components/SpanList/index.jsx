@@ -1,5 +1,8 @@
-export default function SpanList({ entries, setTitle }) {
-    const showProductType = (e) => setTitle(e.target.textContent)
+export default function SpanList({ entries, setTitle, setTitleChanged, titleChanged }) {
+    const showProductType = (e) => {
+        setTitle(e.target.textContent)
+        setTitleChanged(titleChanged + 1)
+    }
 
     return (
         <>
