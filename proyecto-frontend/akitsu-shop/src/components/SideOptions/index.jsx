@@ -80,7 +80,7 @@ export default function SideOptions({ setTitle, setTitleChanged, titleChanged, s
                     <p className="text-2xl">Productos</p>
                     <SpanList setIndexId={setIndexId} setTitleChanged={setTitleChanged} titleChanged={titleChanged} setTitle={setTitle} entries={["Productos más recientes", "Hogar", "Cocina", "Ropa", "Accesorios / Otros"]}/>
                 </Card>
-                <Link><button>hi</button></Link>
+                <Link to="/signin"><button>hi</button></Link>
             </div>
         </div>
         </>
