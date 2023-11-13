@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Card, DialogContainer, SpanList } from "../../components";
+import { Link } from "react-router-dom";
 
 export default function SideOptions({ setTitle, setTitleChanged, titleChanged, setIndexId, currentId, setcurrentId, products }) {
     const separatedIds = currentId[0]?.split("")
@@ -79,6 +80,7 @@ export default function SideOptions({ setTitle, setTitleChanged, titleChanged, s
                     <p className="text-2xl">Productos</p>
                     <SpanList setIndexId={setIndexId} setTitleChanged={setTitleChanged} titleChanged={titleChanged} setTitle={setTitle} entries={["Productos más recientes", "Hogar", "Cocina", "Ropa", "Accesorios / Otros"]}/>
                 </Card>
+                <Link><button>hi</button></Link>
             </div>
         </div>
         </>
