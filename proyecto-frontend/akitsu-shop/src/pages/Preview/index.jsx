@@ -18,8 +18,6 @@ export default function Preview() {
         getProducts()
         }, [])
 
-    const onImageClick = (p) => navigate(`/preview/${p.id}`)
-
     return (
         <>
           <div className="w-full flex bg-pinkBg justify-center items-center">
@@ -29,13 +27,15 @@ export default function Preview() {
                     <div className="grid grid-cols-4 gap-5">
                         {products?.map((product) => {
                             return (
-                                <Image 
-                                key={product.id} 
-                                link={product.url} 
-                                wSize="max-w-[220px]" 
-                                hSize="max-h-[220px]" 
-                                className="rounded-lg border-4 border-black hover:scale-110 transition duration-300"
-                                onClick={onImageClick(product)}/>
+                                <div className="flex flex-col items-center" key={product.id} >
+                                    <Image 
+                                    link={product.url} 
+                                    wSize="max-w-[220px]" 
+                                    hSize="max-h-[220px]" 
+                                    className="rounded-lg border-4 border-black hover:scale-110 transition duration-300 cursor-pointer"
+                                    onClick={() => navigate(`/preview/${product.id}`)}/>
+                                    <p className="text-lg mt-3">{product.name}</p>
+                                </div>
                             )
                         })}
                     </div>

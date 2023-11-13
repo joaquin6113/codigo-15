@@ -16,9 +16,8 @@ export default function Router() {
                 <Route path="/sobrenosotros" element={<AboutUsPage/>}/>
             </Route>
             <Route element={<AdminLayout admin={admin} user={user}/>}>
-              <Route path="/preview"> {/*element={<Preview/>}*/}
-                <Route path="/preview/:id" element={<ProductPreviewPage/>}/>
-              </Route>
+              <Route path="/preview" element={<Preview/>}></Route>
+              <Route path="/preview/:id" element={<ProductPreviewPage/>}/>
             </Route>
             <Route path="/signup" element={<SignUpPage/>}/>
             <Route path="/signin" element={<SignInPage/>}/>

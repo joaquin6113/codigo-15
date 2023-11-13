@@ -1,9 +1,9 @@
 import { useState } from "react"
 
 import { useParams, useNavigate } from "react-router-dom"
-import { Button, Card, DialogContainer, Image, ImageSlider, ImagesModal, ProductData, ProductModal, SideArrows } from "../../components"
+import { Button, Card, DialogContainer, Image, ImageSlider, ImagesModal, ProductData, ProductModal, SideArrows} from "../../components"
 
-export default function ProductInfo({ title, products, index = products.length - 1, getProducts, cardClass, titleChanged, special, admin, user }) {
+export default function ProductInfo({ title, products, index = products.length - 1, getProducts, cardClass, titleChanged, admin, user, indexId, setIndexId, setAddedToCart, currentId, setCurrentId, blueOrRed, setBlueOrRed }) {
     const navigate = useNavigate()
     const { id } = useParams()
 
@@ -11,8 +11,8 @@ export default function ProductInfo({ title, products, index = products.length -
 
     const [open2, setOpen2] = useState(false)
 
-    const [indexIdRecent, setIndexIdRecent] = useState(special - 1)
-
+    const [indexIdRecent, setIndexIdRecent] = useState(0)
+    
     const plusOneRecent = () => {
         setIndexIdRecent(indexIdRecent - 1)
 
@@ -20,7 +20,7 @@ export default function ProductInfo({ title, products, index = products.length -
             setIndexIdRecent(index)
             return
         }
-        if (indexIdRecent === 0) setIndexIdRecent(index)
+        if (indexIdRecent <= 0) setIndexIdRecent(index)
     }
 
     const minusOneRecent = () => {
@@ -31,8 +31,6 @@ export default function ProductInfo({ title, products, index = products.length -
 
         setIndexIdRecent(indexIdRecent + 1)
     }
-
-    const [indexId, setIndexId] = useState(0)
 
     const filter = () => {
         let number = 0
@@ -65,11 +63,7 @@ export default function ProductInfo({ title, products, index = products.length -
         return forIndexes[forIndexes.length - 1]
     }
 
-    const giveIdRecent = () => {
-        if (indexIdRecent <= - 1) {
-            setIndexIdRecent(-1 + filteredProductsIds?.length)
-        }
-    }
+    const [open, setOpen] = useState(false)
 
     const finish = () => {
         navigate("/")
@@ -81,7 +75,8 @@ export default function ProductInfo({ title, products, index = products.length -
             <Card>
                 <div className="flex justify-between items-center">
                     <h1 className="text-5xl py-3 pb-6 pl-4 text-center">{title}:</h1>
-                    {isAdmin && !id && <ProductModal index={index} products={products} getProducts={getProducts}/>}
+                    {isAdmin && !id && <button className="text-xl p-3 px-10 border-4 border-blue-800 bg-blue-400 rounded-xl" onClick={() => navigate(`/preview`)}>Ver galería</button>}
+                    {isAdmin && !id && <ProductModal index={index} products={products} getProducts={getProducts} open={open} setOpen={setOpen}/>}
                     {products[index]?.url && id && <div onClick={finish} className="mr-5"><Button text="Publicar"/></div>}
                 </div>
                 <hr className="border border-black mb-2 mx-5"/>
@@ -106,9 +101,9 @@ export default function ProductInfo({ title, products, index = products.length -
                         </DialogContainer>
 
                     </div>
-                    {products[giveIndex()]?.category === title && <ProductData admin={admin} user={user} title={title} products={products} indexNormal={filteredProductsIds[indexId]}/>}
-                    {title === "Productos más recientes" && <ProductData admin={admin} user={user} title={title} products={products} index={indexIdRecent}/>}
-                    {id && <ProductData admin={admin} user={user} title={title} products={products} index={index} id={id}/>}
+                    {products[giveIndex()]?.category === title && <ProductData admin={admin} user={user} title={title} products={products} indexNormal={filteredProductsIds[indexId]} setCurrentId={setCurrentId} currentId={currentId} blueOrRed={blueOrRed} setBlueOrRed={setBlueOrRed}/>}
+                    {title === "Productos más recientes" && <ProductData admin={admin} user={user} title={title} products={products} index={indexIdRecent} setAddedToCart={setAddedToCart} setCurrentId={setCurrentId} currentId={currentId} blueOrRed={blueOrRed} setBlueOrRed={setBlueOrRed}/>}
+                    {id && <ProductData admin={admin} user={user} title={title} products={products} index={index} id={id}  open={open} setOpen={setOpen} getProducts={getProducts}/>}
                 </div>
             </Card>
           </div>

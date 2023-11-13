@@ -1,15 +1,3 @@
-function isPrime(numero) {
-    if (numero === 1) return "es primo"
+const number = [1.01, 1.02, 1.03, 1.04, 2.05, 5.24, 1.07, 3.70]
 
-    let cont = 0
-
-    for (i = 1; i <= numero; i++) {
-        if (numero % i === 0) cont ++
-    }
-
-    return cont === 2 ? "es primo" : "no es primo"
-  }
-  
-  for (let i = 1; i <= 100; i++) {
-    console.log(i, isPrime(i));
-  }
+console.log(number.sort())

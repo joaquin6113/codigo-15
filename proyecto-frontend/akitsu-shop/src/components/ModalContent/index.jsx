@@ -1,22 +1,33 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { create } from "../../services"
+import { create, update } from "../../services"
 import { Button, CategorySelect, OfferToggle, TextField } from "../../components"
 import { inputs } from "./inputs"
 import { ValuesAndFunctions } from "./values"
 import { showCurrentId } from "../../utils"
 
 
-export default function ModalContent({ onClose, getProducts, index, products }) {
-    const { values, handleInputs } = ValuesAndFunctions()
+export default function ModalContent({ onClose, getProducts, id, products, setOpen }) {
+    const { values, handleInputs } = ValuesAndFunctions(products, id)
 
     const navigate = useNavigate()
 
     const createInputs = () => inputs.map((i) => {
-        return (
-            <TextField key={i.name} value={values[i.name]} placeholder={i.placeholder} type={i.type} onChange={handleInputs[i.name]} className="rounded-lg" required/>
-        )
-    })
+            return (
+                <TextField key={i.name} value={values[i.name]} placeholder={i.placeholder} type={i.type} onChange={handleInputs[i.name]} className="rounded-lg" required/>
+            )})
+
+    const modificatedInputs = () => {return (
+            [
+            <TextField value={values?.title2} placeholder="Escribe un título" type="text" onChange={handleInputs?.title2} className="rounded-lg" required/>, 
+            <TextField value={values?.description2} placeholder="Escribe una descripción" type="text" onChange={handleInputs?.description2} className="rounded-lg" required/>, 
+            <TextField value={values?.currentprice2} placeholder="Precio actual" type="number" onChange={handleInputs?.currentprice2} className="rounded-lg" required/>, 
+            <TextField value={values?.previousprice2} placeholder="Precio anterior" type="number" onChange={handleInputs?.previousprice2} className="rounded-lg" required/>, 
+        ]
+        )}
+    
+    const specialInputs = modificatedInputs()
+
     const createdInput = createInputs()
 
     const [hasDiscount, setHasDiscount] = useState(false)
@@ -28,24 +39,42 @@ export default function ModalContent({ onClose, getProducts, index, products }) 
     const handleSubmit = async (e) => {
         e.preventDefault()
 
-        await create({
-            name: createdInput[0].props.value,
-            description: createdInput[1].props.value,
-            currentPrice: createdInput[2].props.value,
-            hasDiscount: hasDiscount,
-            originalPrice: hasDiscount ? createdInput[3].props.value : "",
-            category: category
-        }, 
-        "products"
-        )
+        if (!id) {
+            await create({
+                name: createdInput[0].props.value,
+                description: createdInput[1].props.value,
+                currentPrice: createdInput[2].props.value,
+                hasDiscount: hasDiscount,
+                originalPrice: hasDiscount ? createdInput[3].props.value : "",
+                category: category
+            }, 
+            "products"
+            )
+        }
 
-        onClose()
+        if (id) {
+            await update(
+                id,
+                {name: specialInputs[0].props.value,
+                description: specialInputs[1].props.value,
+                currentPrice: specialInputs[2].props.value,
+                hasDiscount: hasDiscount,
+                originalPrice: hasDiscount ? specialInputs[3].props.value : "",
+                category: category,
+                },
+                "products",
+            )
+        }
+
+        if (!id) onClose()
+        if (id) setOpen(false)
 
         const currentId = await showCurrentId(createdInput)
 
         await getProducts()
 
-        navigate(`/preview/${currentId}`)
+        if (!id) navigate(`/preview/${currentId}`)
+        if (id) navigate(`/preview`)
     }
 
     return (
@@ -54,7 +83,7 @@ export default function ModalContent({ onClose, getProducts, index, products }) 
             <div>
                 <h2 className="mb-[5px]">Título:</h2>
                 <div className="text-lg">
-                    {createdInput[0]}
+                 {!id && createdInput[0]} {id && specialInputs[0]}
                 </div>
             </div>
                 <div>
@@ -67,13 +96,13 @@ export default function ModalContent({ onClose, getProducts, index, products }) 
         <div className="mb-5">
             <h2 className="mb-[5px]">Descripción:</h2>
             <div className="text-lg">
-                {createdInput[1]}
+                 {!id && createdInput[1]} {id && specialInputs[1]}
             </div>
         </div>
         <div className="grid grid-cols-3 place-items-center mb-5">
             <div>
                 <h2 className="mb-[5px]">Precio actual:</h2>
-                {createdInput[2]}
+                 {!id && createdInput[2]} {id && specialInputs[2]}
             </div>
             <div className="flex flex-col gap-3 items-center justify-center">
                 <h2>¿Hay oferta?</h2>
@@ -86,12 +115,13 @@ export default function ModalContent({ onClose, getProducts, index, products }) 
             {hasDiscount && 
             <div>
                 <h2 className="mb-[5px]">Precio Anterior:</h2>
-                {createdInput[3]}
+                 {!id && createdInput[3]} {id && specialInputs[3]}
             </div>
             }
         </div>
         <div className="flex justify-center items-center">
-            <Button text=">> Siguiente paso >>"/>
+            {!id && <Button text=">> Siguiente paso >>"/>}
+            {id && <Button text="Actualizar"/>}
         </div>
         </form>
     )

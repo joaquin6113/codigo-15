@@ -2,8 +2,8 @@ import { useState } from "react"
 import { PlusIcon } from "@heroicons/react/24/solid"
 import { DialogContainer, ModalContent } from "../../components"
 
-export default function ProductModal({ getProducts, index, products }) {
-    const [open, setOpen] = useState(false)
+export default function ProductModal({ getProducts, index, products, open, setOpen }) {
+    
 
     return (
         <>
