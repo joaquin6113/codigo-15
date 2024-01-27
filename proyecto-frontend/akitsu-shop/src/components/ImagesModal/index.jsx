@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom"
 import { update } from "../../services"
 import Swal from "sweetalert2"
 import { Image, Button } from "../../components"
-import { imageGallery } from "../../assets/imageGallery"
+import { finalUrls } from "../../assets/imageGallery"
 
 
 
@@ -14,13 +14,22 @@ export default function ImagesModal({ getProducts, setOpen2 }) {
 
   const box = []
 
-  for (let i = 0; i <= imageGallery.length - 1; i++) {
-    box.push({
-      number: i,
-      clicked: false,
-      image: imageGallery[i],
-    }) 
+  console.log(finalUrls)
+
+  const urls = Object.values(finalUrls)
+  let more = []
+
+  for (let i = 0; i < 4; i++) {
+    more += Object.values(urls[i]).join()
+    for (let h = 0; h < 4; h++){
+      box.push({
+        number: h,
+        clicked: false,
+        image: urls[h],
+      }) 
+    }
   }
+  console.log(more.split(","))
 
   const [imgData, setImgData] = useState(box)
   

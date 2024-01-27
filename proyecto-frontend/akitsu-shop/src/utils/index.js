@@ -1,10 +1,10 @@
 import { read } from "../services"
 import Swal from "sweetalert2"
 
-export async function findUser( field, value) {
-    const users = await read("users")
+export async function findUser(field, value) {
+    const { data } = await read("users")
 
-    return users.find(
+    return data.find(
          (user) => user[field].toLowerCase() === value.toLowerCase()
       )
 }
@@ -17,13 +17,13 @@ export function showError(text) {
 }
 
 export async function showCurrentId(createdInput) {
-const resources = await read("products")
+    const { data } = await read("products")
 
-const idArray = resources.map((element) => {
-    if (element.name === createdInput[0].props.value) return element.id
-})
+    const idArray = data.map((element) => {
+        if (element.name === createdInput[0].props.value) return element.id
+    })
 
-const currentId = idArray.find((id) => id !== undefined)
+    const currentId = idArray.find((id) => id !== undefined)
 
-return resources, currentId
+    return data, currentId
 }

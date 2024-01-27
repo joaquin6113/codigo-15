@@ -7,8 +7,8 @@ import { ValuesAndFunctions } from "./values"
 import { showCurrentId } from "../../utils"
 
 
-export default function ModalContent({ onClose, getProducts, id, products, setOpen }) {
-    const { values, handleInputs } = ValuesAndFunctions(products, id)
+export default function ModalContent({ onClose, getProducts, id, products, setOpen, product }) {
+    const { values, handleInputs } = ValuesAndFunctions(products, id, product)
 
     const navigate = useNavigate()
 
@@ -36,18 +36,24 @@ export default function ModalContent({ onClose, getProducts, id, products, setOp
 
     const [category, setCategory] = useState(categories[0])
 
+    const object = {
+        name: createdInput[0].props.value,
+        description: createdInput[1].props.value,
+        current_price: Number(createdInput[2].props.value),
+        has_discount: hasDiscount,
+        original_price: hasDiscount ? Number(createdInput[3].props.value) : null,
+        category: category
+    }
+
     const handleSubmit = async (e) => {
         e.preventDefault()
 
+        if (!hasDiscount) {
+            delete object.original_price
+        }
+
         if (!id) {
-            await create({
-                name: createdInput[0].props.value,
-                description: createdInput[1].props.value,
-                currentPrice: createdInput[2].props.value,
-                hasDiscount: hasDiscount,
-                originalPrice: hasDiscount ? createdInput[3].props.value : "",
-                category: category
-            }, 
+            await create(object, 
             "products"
             )
         }
@@ -55,13 +61,7 @@ export default function ModalContent({ onClose, getProducts, id, products, setOp
         if (id) {
             await update(
                 id,
-                {name: specialInputs[0].props.value,
-                description: specialInputs[1].props.value,
-                currentPrice: specialInputs[2].props.value,
-                hasDiscount: hasDiscount,
-                originalPrice: hasDiscount ? specialInputs[3].props.value : "",
-                category: category,
-                },
+                object,
                 "products",
             )
         }

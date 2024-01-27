@@ -1,7 +1,7 @@
 import { useState } from "react"
 
 import { useParams, useNavigate } from "react-router-dom"
-import { Button, Card, DialogContainer, Image, ImageSlider, ImagesModal, ProductData, ProductModal, SideArrows} from "../../components"
+import { Button, Card, DialogContainer, DragAndDrop, Image, ImageSlider, ImagesModal, ProductData, ProductModal, SideArrows} from "../../components"
 
 export default function ProductInfo({ title, products, index = products.length - 1, getProducts, cardClass, titleChanged, admin, user, indexId, setIndexId, setAddedToCart, currentId, setCurrentId, blueOrRed, setBlueOrRed }) {
     const navigate = useNavigate()
@@ -10,8 +10,11 @@ export default function ProductInfo({ title, products, index = products.length -
     const isAdmin = user?.email === admin
 
     const [open2, setOpen2] = useState(false)
+    const [files, setFiles] = useState([])
 
     const [indexIdRecent, setIndexIdRecent] = useState(0)
+
+    let { productFR } = {productFR: products.filter((product) => product.id === Number(id))}
     
     const plusOneRecent = () => {
         setIndexIdRecent(indexIdRecent - 1)
@@ -77,33 +80,34 @@ export default function ProductInfo({ title, products, index = products.length -
                     <h1 className="text-5xl py-3 pb-6 pl-4 text-center">{title}:</h1>
                     {isAdmin && !id && <button className="text-xl p-3 px-10 border-4 border-blue-800 bg-blue-400 rounded-xl" onClick={() => navigate(`/preview`)}>Ver galería</button>}
                     {isAdmin && !id && <ProductModal index={index} products={products} getProducts={getProducts} open={open} setOpen={setOpen}/>}
-                    {products[index]?.url && id && <div onClick={finish} className="mr-5"><Button text="Publicar"/></div>}
+                    {productFR?.url && id && <div onClick={finish} className="mr-5"><Button text="Publicar"/></div>}
                 </div>
                 <hr className="border border-black mb-2 mx-5"/>
                 <div className="flex items-center">
                     <div className="w-[55%] flex items-center justify-between p-5">
                         <div className="flex flex-col items-center justify-center w-full py-12 px-6 gap-5 max-h-[600px]">
-                        {products[index]?.url && !id && products[giveIndex()]?.category === title && 
+                        {productFR?.url && !id && products[giveIndex()]?.category === title && 
                             <SideArrows onClickRigth={plusOne} onClickLeft={minusOne}>
                                 <ImageSlider key={id} id={filteredProductsIds[indexId]} products={products}/>
                             </SideArrows>}
-                        {products[index]?.url && !id && title === "Productos más recientes" && 
+                        {productFR?.url && !id && title === "Productos más recientes" && 
                             <SideArrows onClickRigth={plusOneRecent} onClickLeft={minusOneRecent}>
                                <ImageSlider idRecent={indexIdRecent} products={products}/>
                             </SideArrows>}
-                            {products[index]?.url && id && <Image link={products[index]?.url} className="border-4 border-brownBg rounded-2xl" wSize="500px" hSize="500px"/>}
-                            <div onClick={() => setOpen2(true)}>
-                              {id && <Button text="Seleccionar imagen"/>}
+                            {productFR?.url && id && <Image link={products[index]?.url} className="border-4 border-brownBg rounded-2xl" wSize="500px" hSize="500px"/>}
+                            <div>
+                              {id && !(productFR?.url) && <DragAndDrop onFilesSelected={setFiles} width="300px" height="400px"/>}
+                              {id && !(productFR?.url) && <button onClick={() => setOpen2(true)} className="flex-1 ml-6 text-xl p-3 px-10 border-4 border-blue-600 bg-blue-400 rounded-xl">Elegir de galería</button>}
                             </div>
+                            <DialogContainer openV={open2} openF={setOpen2} title="Imágenes">
+                                <ImagesModal setOpen2={setOpen2}/>
+                            </DialogContainer>
                         </div>
-                        <DialogContainer title="Seleccione la imagen del producto" openV={open2} openF={setOpen2}>
-                            <ImagesModal setOpen2={setOpen2} getProducts={getProducts}/>
-                        </DialogContainer>
 
                     </div>
                     {products[giveIndex()]?.category === title && <ProductData admin={admin} user={user} title={title} products={products} indexNormal={filteredProductsIds[indexId]} setCurrentId={setCurrentId} currentId={currentId} blueOrRed={blueOrRed} setBlueOrRed={setBlueOrRed}/>}
                     {title === "Productos más recientes" && <ProductData admin={admin} user={user} title={title} products={products} index={indexIdRecent} setAddedToCart={setAddedToCart} setCurrentId={setCurrentId} currentId={currentId} blueOrRed={blueOrRed} setBlueOrRed={setBlueOrRed}/>}
-                    {id && <ProductData admin={admin} user={user} title={title} products={products} index={index} id={id}  open={open} setOpen={setOpen} getProducts={getProducts}/>}
+                    {id && <ProductData admin={admin} user={user} title={title} product={productFR} index={index} id={id} open={open} setOpen={setOpen} getProducts={getProducts}/>}
                 </div>
             </Card>
           </div>

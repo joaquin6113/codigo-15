@@ -4,6 +4,7 @@ export { default as Card } from "./Card"
 export { default as CategorySelect } from "./CategorySelect"
 
 export { default as DialogContainer } from "./DialogContainer"
+export { default as DragAndDrop } from "./DragAndDrop"
 
 export { default as Form } from "./Form"
 

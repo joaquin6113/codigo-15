@@ -13,8 +13,8 @@ export default function Home({ admin, user }) {
     const [titleChanged, setTitleChanged] = useState(0)
   
     const getProducts = async () => {
-      const response = await read("products")
-      setProducts(response)
+      const { data } = await read("products")
+      setProducts(data)
       setAmount(products.length)
     }
   

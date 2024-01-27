@@ -3,7 +3,7 @@ import { PlusCircleIcon, ArrowRightIcon, XMarkIcon } from "@heroicons/react/24/s
 import Swal from "sweetalert2"
 import { DialogContainer, ModalContent } from "../../components"
 
-export default function ProductData({ products, index, title, id, indexNormal, setCurrentId, currentId, blueOrRed, setBlueOrRed, setOpen, getProducts }) {
+export default function ProductData({ products, index, product, title, id, indexNormal, setCurrentId, currentId, blueOrRed, setBlueOrRed, setOpen, getProducts }) {
     const [open5, setOpen5] = useState(false)
 
     const valueIfTrue = (value) => {
@@ -163,18 +163,18 @@ export default function ProductData({ products, index, title, id, indexNormal, s
     <div className="flex flex-1 justify-center items-center p-10 border-l-2 border-black ">
             <div className="flex flex-col gap-10">
                 <div key="titleAndDesk" className="flex flex-col gap-10">
-                    <h2 className="text-center text-4xl"> {products[Number(id) - 1]?.name} </h2>
-                    <p className="text-center text-2xl"> {products[Number(id) - 1]?.description} </p>
+                    <h2 className="text-center text-4xl"> {product?.name} </h2>
+                    <p className="text-center text-2xl"> {product?.description} </p>
                 </div>
                     <div className="flex flex-col mt-5 gap-5">
-                        {products[Number(id) - 1]?.originalPrice && 
+                        {product?.originalPrice && 
                         <p className="text-center text-2xl">💥💥  OFERTA  💥💥</p>}
                         <div className="flex justify-center items-center gap-10">
                             <div className="flex flex-col items-center">
-                                <p className="text-lg">Precio{products[Number(id) - 1]?.originalPrice ? " antes" : ""}:</p>
-                                <p className="text-3xl">S/. {products[Number(id) - 1]?.currentPrice}</p>
+                                <p className="text-lg">Precio{product?.originalPrice ? " antes" : ""}:</p>
+                                <p className="text-3xl">S/. {product?.currentPrice}</p>
                             </div>
-                            {products[Number(id) - 1]?.originalPrice && 
+                            {product?.originalPrice && 
                             <>
                                 <div className="flex">
                                     <ArrowRightIcon className="w-6 text-red-600"/>
@@ -182,7 +182,7 @@ export default function ProductData({ products, index, title, id, indexNormal, s
                                 </div>
                                 <div className="flex flex-col items-center">
                                     <p className="text-lg">Precio con oferta:</p>
-                                    <p className="text-3xl">S/. {products[Number(id) - 1]?.originalPrice}</p>
+                                    <p className="text-3xl">S/. {product?.originalPrice}</p>
                                 </div>
                             </>
                             }    
@@ -191,7 +191,7 @@ export default function ProductData({ products, index, title, id, indexNormal, s
                 <div className="flex justify-center items-center mt-20">
                     <button className="text-xl p-3 px-10 border-4 border-blue-600 bg-blue-400 rounded-xl" onClick={() => setOpen5(true)}>Editar contenido</button>
                     <DialogContainer openV={open5} openF={setOpen5} title="Editar">
-                        <ModalContent id={id} products={products} open={open} setOpen={setOpen} getProducts={getProducts}/>
+                        <ModalContent id={id} product={product} products={products} open={open} setOpen={setOpen} getProducts={getProducts}/>
                     </DialogContainer>
                 </div>
             </div>

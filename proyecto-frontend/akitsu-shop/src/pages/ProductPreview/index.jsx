@@ -12,8 +12,8 @@ export default function ProductPreview() {
       // const userId = useSelector(selectorUserId)
   
     const getProducts = async () => {
-      const response = await read("products")
-      setProducts(response)
+      const { data } = await read("products")
+      setProducts(data)
     }
   
     useEffect(() => {
@@ -28,7 +28,7 @@ export default function ProductPreview() {
           index={Number(id) - 1}
           products={products}
           getProducts={getProducts}
-          id={products.length - 1}/>
+          id={Number(id)}/>
         </>
     )
 }

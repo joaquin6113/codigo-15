@@ -10,8 +10,8 @@ export default function Preview() {
     const [products, setProducts] = useState([])
 
     const getProducts = async () => {
-        const response = await read("products")
-        setProducts(response)
+        const { data } = await read("products")
+        setProducts(data)
       }
 
     useEffect(() => {

@@ -1,6 +1,6 @@
 import { useForm } from "../../hooks/useForm"
 import { useDispatch } from "react-redux"
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { saveUser } from "../../slices/userSlice"
 import { Card, Form } from "../../components"
 import { inputs } from "./inputs"
@@ -23,7 +23,7 @@ export default function SignUp() {
         
         const user = await create(values, "users")
         dispatch(saveUser(user))
-        navigate("/")
+        navigate("/signin")
     }
 
     return (
@@ -39,6 +39,11 @@ export default function SignUp() {
                   errors={errors}
                   buttonText="Crear cuenta"
                 />
+                <Link to="/signin">
+                  <div className="text-center">
+                    <span className="text-blue-800">¿Ya tienes una cuenta? Inicia sesión!</span>
+                  </div>
+                </Link>
             </Card>
           </div>
         </>

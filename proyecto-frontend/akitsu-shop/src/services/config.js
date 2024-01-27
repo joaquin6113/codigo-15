@@ -1,4 +1,4 @@
-const baseUrl = "https://6544aea85a0b4b04436cba9b.mockapi.io/"
+const baseUrl = "http://localhost:3002/api/v1/"
 
 export async function doHttpsRequest({ url, id, body, method = "GET" }) {
     const endpoint = id ? `${url}/${id}` : url
@@ -7,6 +7,7 @@ export async function doHttpsRequest({ url, id, body, method = "GET" }) {
         method,
         headers: {
             "Content-Type" : "application/json",
+            // "Authorization": `Bearer ${localStorage.getItem("access_token")}`
         },
         body: JSON.stringify(body)
     })

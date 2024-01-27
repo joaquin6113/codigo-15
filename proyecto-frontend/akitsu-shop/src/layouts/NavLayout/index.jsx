@@ -1,9 +1,15 @@
-import { Outlet, Link } from "react-router-dom"
+import { Outlet, Link, useNavigate } from "react-router-dom"
 import { ShoppingCartIcon, HomeIcon } from "@heroicons/react/24/solid"
 import akitsuLogo from "../../assets/akitsu-shop-4-3.jpg"
 
 
 export default function NavLayout() {
+  const navigate = useNavigate()
+
+  if (!localStorage.getItem("user")) {
+    navigate("signin")
+  }
+
     return (
         <>
           <nav className="bg-white border-b-4 border-brownBg w-full px-10 py-2 flex gap-16 items-center justify-end">
