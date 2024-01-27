@@ -52,6 +52,6 @@ for (let i = 0; i < 4; i += 1) {
     }
 }
 
-outputUrls[3].others.push(`codigo-15-${times[16]}-${category[3]}-product-5.jpg`)
+outputUrls[3].others.push(`https://proyecto-akitsu-shop.s3.us-west-2.amazonaws.com/images/codigo-15-${times[16]}-${category[3]}-product-5.jpg`)
 
 export const finalUrls = outputUrls

@@ -5,7 +5,7 @@ import { Button, Card, DialogContainer, DragAndDrop, Image, ImageSlider, ImagesM
 
 export default function ProductInfo({ title, products, index = products.length - 1, getProducts, cardClass, titleChanged, admin, user, indexId, setIndexId, setAddedToCart, currentId, setCurrentId, blueOrRed, setBlueOrRed }) {
     const navigate = useNavigate()
-    const { id } = useParams()
+    const { id, cat } = useParams()
 
     const isAdmin = user?.email === admin
 
@@ -86,13 +86,13 @@ export default function ProductInfo({ title, products, index = products.length -
                 <div className="flex items-center">
                     <div className="w-[55%] flex items-center justify-between p-5">
                         <div className="flex flex-col items-center justify-center w-full py-12 px-6 gap-5 max-h-[600px]">
-                        {productFR?.url && !id && products[giveIndex()]?.category === title && 
+                        {/*productFR?.url*/!id && title === "Productos más recientes" && 
+                                <SideArrows onClickRigth={plusOneRecent} onClickLeft={minusOneRecent}>
+                                   <ImageSlider idRecent={indexIdRecent} products={products}/>
+                                </SideArrows>}
+                        {/*productFR?.url*/!id && title !== "Productos más recientes" &&
                             <SideArrows onClickRigth={plusOne} onClickLeft={minusOne}>
-                                <ImageSlider key={id} id={filteredProductsIds[indexId]} products={products}/>
-                            </SideArrows>}
-                        {productFR?.url && !id && title === "Productos más recientes" && 
-                            <SideArrows onClickRigth={plusOneRecent} onClickLeft={minusOneRecent}>
-                               <ImageSlider idRecent={indexIdRecent} products={products}/>
+                                <ImageSlider key={id} id={filteredProductsIds} products={products}/>
                             </SideArrows>}
                             {productFR?.url && id && <Image link={products[index]?.url} className="border-4 border-brownBg rounded-2xl" wSize="500px" hSize="500px"/>}
                             <div>
@@ -105,9 +105,9 @@ export default function ProductInfo({ title, products, index = products.length -
                         </div>
 
                     </div>
-                    {products[giveIndex()]?.category === title && <ProductData admin={admin} user={user} title={title} products={products} indexNormal={filteredProductsIds[indexId]} setCurrentId={setCurrentId} currentId={currentId} blueOrRed={blueOrRed} setBlueOrRed={setBlueOrRed}/>}
+                    {id && <ProductData admin={admin} user={user} title={title} index={index} open={open} setOpen={setOpen} products={products} getProducts={getProducts}/>}
+                    {products[giveIndex()]?.category === title && <ProductData admin={admin} user={user} title={title} products={products} indexNormal={filteredProductsIds} setCurrentId={setCurrentId} currentId={currentId} blueOrRed={blueOrRed} setBlueOrRed={setBlueOrRed}/>}
                     {title === "Productos más recientes" && <ProductData admin={admin} user={user} title={title} products={products} index={indexIdRecent} setAddedToCart={setAddedToCart} setCurrentId={setCurrentId} currentId={currentId} blueOrRed={blueOrRed} setBlueOrRed={setBlueOrRed}/>}
-                    {id && <ProductData admin={admin} user={user} title={title} product={productFR} index={index} id={id} open={open} setOpen={setOpen} getProducts={getProducts}/>}
                 </div>
             </Card>
           </div>

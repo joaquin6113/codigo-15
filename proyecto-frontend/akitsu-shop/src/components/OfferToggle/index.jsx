@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Switch } from '@headlessui/react'
 
 export default function OfferToggle({ setHasDiscount }) {
-    const [enabled, setEnabled] = useState(false)
+    const [enabled, setEnabled] = useState(true)
 
     const onToggle = () => {
         setEnabled(!enabled ? true : false);

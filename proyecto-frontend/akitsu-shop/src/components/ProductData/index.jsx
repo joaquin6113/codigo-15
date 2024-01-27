@@ -2,9 +2,16 @@ import { useState } from "react"
 import { PlusCircleIcon, ArrowRightIcon, XMarkIcon } from "@heroicons/react/24/solid"
 import Swal from "sweetalert2"
 import { DialogContainer, ModalContent } from "../../components"
+import { useParams } from "react-router-dom"
 
-export default function ProductData({ products, index, product, title, id, indexNormal, setCurrentId, currentId, blueOrRed, setBlueOrRed, setOpen, getProducts }) {
+export default function ProductData({ products, index, title, indexNormal, setCurrentId, currentId, blueOrRed, setBlueOrRed, setOpen, getProducts }) {
+    const { id, cat } = useParams()
+
     const [open5, setOpen5] = useState(false)
+
+    let { product } = {product: products?.filter((product) => product.id === Number(id))}
+
+    console.log(product)
 
     const valueIfTrue = (value) => {
         return blueOrRed.map((number) => {
@@ -63,23 +70,24 @@ export default function ProductData({ products, index, product, title, id, index
 
     const addId2 = () => skeletonAddId(indexNormal - 1)
     const deleteId2 = () => skeletonDeleteId(indexNormal - 1)
+
     return (
         <>
-        {!id && title !== "Productos más recientes" && <div className="flex flex-1 justify-center items-center p-10 border-l-2 border-black">
+        {!id && title === cat && <div className="flex flex-1 justify-center items-center p-10 border-l-2 border-black">
         <div className="flex flex-col gap-10">
             <div key="titleAndDesk" className="flex flex-col gap-10">
-                <h2 className="text-center text-4xl"> {products[indexNormal - 1]?.name} </h2>
-                <p className="text-center text-2xl"> {products[indexNormal - 1]?.description} </p>
+                <h2 className="text-center text-4xl"> {products[0]?.name} </h2>
+                <p className="text-center text-2xl"> {products[0]?.description} </p>
             </div>
                 <div className="flex flex-col mt-5 gap-5">  
-                    {products[indexNormal - 1]?.hasDiscount && 
+                    {products[0]?.hasDiscount && 
                     <p className="text-center text-2xl">💥💥  OFERTA  💥💥</p>}
                     <div className="flex justify-center items-center gap-10">
                         <div className="flex flex-col items-center">
-                            <p className="text-lg">Precio{products[indexNormal - 1]?.originalPrice ? " antes" : ""}:</p>
-                            <p className="text-3xl">S/. {products[indexNormal - 1]?.currentPrice}</p>
+                            <p className="text-lg">Precio{products[0]?.originalPrice ? " antes" : ""}:</p>
+                            <p className="text-3xl">S/. {products[0]?.currentPrice}</p>
                         </div>
-                        {products[indexNormal - 1]?.originalPrice && 
+                        {products[0]?.originalPrice && 
                         <>
                             <div className="flex">
                                 <ArrowRightIcon className="w-6 text-red-600"/>
@@ -87,21 +95,21 @@ export default function ProductData({ products, index, product, title, id, index
                             </div>
                             <div className="flex flex-col items-center">
                                 <p className="text-lg">Precio con oferta:</p>
-                                <p className="text-3xl">S/. {products[indexNormal - 1]?.originalPrice}</p>
+                                <p className="text-3xl">S/. {products[0]?.originalPrice}</p>
                             </div>
                         </>
                         }    
                     </div>
                 </div>
             <div className="flex justify-center items-center mt-20">
-            {blueOrRed[indexNormal - 1].show &&
+            {blueOrRed[indexNormal - 1]?.show &&
                 <div onClick={addId2}>
                     <div className="flex flex-col items-center">
                         <PlusCircleIcon className="w-10 text-blue-500 cursor-pointer hover:scale-[150%] transition duration-300"/>
                         <p className="text-sm pt-2">(Añadir a la lista de compras)</p>
                     </div>
                 </div>}
-                {blueOrRed[indexNormal - 1].show === false &&
+                {blueOrRed[indexNormal - 1]?.show === false &&
                 <div onClick={deleteId2}>
                     <div className="flex flex-col items-center">
                         <XMarkIcon className="w-10 bg-red-500 cursor-pointer hover:scale-[150%] transition duration-300 rounded-full text-white"/>
@@ -163,18 +171,18 @@ export default function ProductData({ products, index, product, title, id, index
     <div className="flex flex-1 justify-center items-center p-10 border-l-2 border-black ">
             <div className="flex flex-col gap-10">
                 <div key="titleAndDesk" className="flex flex-col gap-10">
-                    <h2 className="text-center text-4xl"> {product?.name} </h2>
-                    <p className="text-center text-2xl"> {product?.description} </p>
+                    <h2 className="text-center text-4xl"> {product[0]?.name} </h2>
+                    <p className="text-center text-2xl"> {product[0]?.description} </p>
                 </div>
                     <div className="flex flex-col mt-5 gap-5">
-                        {product?.originalPrice && 
+                        {product[0]?.originalPrice && 
                         <p className="text-center text-2xl">💥💥  OFERTA  💥💥</p>}
                         <div className="flex justify-center items-center gap-10">
                             <div className="flex flex-col items-center">
-                                <p className="text-lg">Precio{product?.originalPrice ? " antes" : ""}:</p>
-                                <p className="text-3xl">S/. {product?.currentPrice}</p>
+                                <p className="text-lg">Precio{product[0]?.originalPrice ? " antes" : ""}:</p>
+                                <p className="text-3xl">S/. {product[0]?.currentPrice}</p>
                             </div>
-                            {product?.originalPrice && 
+                            {product[0]?.originalPrice && 
                             <>
                                 <div className="flex">
                                     <ArrowRightIcon className="w-6 text-red-600"/>
@@ -182,7 +190,7 @@ export default function ProductData({ products, index, product, title, id, index
                                 </div>
                                 <div className="flex flex-col items-center">
                                     <p className="text-lg">Precio con oferta:</p>
-                                    <p className="text-3xl">S/. {product?.originalPrice}</p>
+                                    <p className="text-3xl">S/. {product[0]?.originalPrice}</p>
                                 </div>
                             </>
                             }    

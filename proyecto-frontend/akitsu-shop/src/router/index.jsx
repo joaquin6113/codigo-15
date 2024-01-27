@@ -13,6 +13,7 @@ export default function Router() {
           <Routes>
             <Route element={<NavLayout admin={admin} user={user}/>}>
                 <Route path="/" element={<HomePage admin={admin} user={user}/>}/>
+                <Route path="/cat/:cat" element={<HomePage admin={admin} user={user}/>}/>
                 <Route path="/sobrenosotros" element={<AboutUsPage/>}/>
             </Route>
             <Route element={<AdminLayout admin={admin} user={user}/>}>

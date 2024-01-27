@@ -14,22 +14,22 @@ export default function ImagesModal({ getProducts, setOpen2 }) {
 
   const box = []
 
-  console.log(finalUrls)
-
   const urls = Object.values(finalUrls)
   let more = []
+
+  let counter = 0
 
   for (let i = 0; i < 4; i++) {
     more += Object.values(urls[i]).join()
     for (let h = 0; h < 4; h++){
       box.push({
-        number: h,
+        number: counter,
         clicked: false,
-        image: urls[h],
+        image: urls[counter],
       }) 
+      counter += 1
     }
   }
-  console.log(more.split(","))
 
   const [imgData, setImgData] = useState(box)
   

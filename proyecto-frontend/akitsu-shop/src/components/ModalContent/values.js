@@ -12,10 +12,10 @@ export function ValuesAndFunctions(products, id, product) {
     const handlePreviousInputChange = (e) => setPreviousValue(e.target.value)
 
     if (id) {
-        const [titleValue2, setTitleValue2] = useState(product.name)    
-        const [descriptionValue2, setDescriptionValue2] = useState(product.description)
-        const [currentValue2, setCurrentValue2] = useState(product.currentPrice)
-        const [previousValue2, setPreviousValue2] = useState(product.previousPrice)
+        const [titleValue2, setTitleValue2] = useState(product[0].name)    
+        const [descriptionValue2, setDescriptionValue2] = useState(product[0].description)
+        const [currentValue2, setCurrentValue2] = useState(product[0].currentPrice)
+        const [previousValue2, setPreviousValue2] = useState(product[0].originalPrice)
 
         const handleTitleInputChange2 = (e) => setTitleValue2(e.target.value)
         const handleDescInputChange2 = (e) => setDescriptionValue2(e.target.value)
@@ -62,12 +62,3 @@ export function ValuesAndFunctions(products, id, product) {
         
     }
 }
-
-// titleValue,
-//         descriptionValue,
-//         currentValue,
-//         previousValue,
-//         handleTitleInputChange,
-//         handleDescInputChange,
-//         handleCurrentInputChange,
-//         handlePreviousInputChange

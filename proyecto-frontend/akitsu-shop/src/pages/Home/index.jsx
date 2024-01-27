@@ -1,9 +1,22 @@
 import { useEffect, useState } from "react"
 import { read } from "../../services"
 import { ProductInfo, SideOptions } from "../../components"
+import { useParams } from "react-router-dom"
 
 export default function Home({ admin, user }) {
-    const [title, setTitle] = useState("Productos más recientes")
+    const { cat } = useParams()
+
+    const firstValue = () => {
+      if (cat === "Accessorios") {
+          return "Accesorios / otros"
+      } else if (cat) {
+          return cat
+      } else {
+        return "Productos más recientes"
+      }
+  }
+
+    const [title, setTitle] = useState(firstValue())
 
     const [indexId, setIndexId] = useState(0)
 

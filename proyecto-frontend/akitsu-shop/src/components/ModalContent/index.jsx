@@ -30,7 +30,7 @@ export default function ModalContent({ onClose, getProducts, id, products, setOp
 
     const createdInput = createInputs()
 
-    const [hasDiscount, setHasDiscount] = useState(false)
+    const [hasDiscount, setHasDiscount] = useState(product[0]?.hasDiscount)
 
     const categories = ["Hogar", "Cocina", "Ropa", "Accesorios / Otros"]
 
